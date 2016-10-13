@@ -23,6 +23,18 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableJpaRepositories(basePackages={"com.springdemo.repositories"})
 @ComponentScan(basePackages = "com.springdemo")
 public class SpringConfig {
+	//AWS CONFIG
+//	private static final String MYSQL_SERVER_IP_ADDRESS = "172.17.0.3";
+//	private static final String MYSQL_SERVER_PORT = "3306";
+//	private static final String DB_NAME = "springdemo";
+//	private static final String DB_USERNAME = "root";
+//	private static final String DB_PASSWORD = "root";
+	//MY LOCAL
+	private static final String MYSQL_SERVER_IP_ADDRESS = "localhost";
+	private static final String MYSQL_SERVER_PORT = "3306";
+	private static final String DB_NAME = "springdemo";
+	private static final String DB_USERNAME = "root";
+	private static final String DB_PASSWORD = "";
 	
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
@@ -43,9 +55,9 @@ public class SpringConfig {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		// TODO : Move hardcoded strings to properties file.
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://localhost:3306/springdemo");
-		dataSource.setUsername("root");
-		dataSource.setPassword("");
+		dataSource.setUrl("jdbc:mysql://"+MYSQL_SERVER_IP_ADDRESS+":"+MYSQL_SERVER_PORT+"/"+DB_NAME);
+		dataSource.setUsername(DB_USERNAME);
+		dataSource.setPassword(DB_PASSWORD);
 		return dataSource;
 	}
 
